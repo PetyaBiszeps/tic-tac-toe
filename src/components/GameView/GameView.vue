@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { GameView } from '@/components/GameView/GameViewData.ts';
-import { players } from './Constants.ts';
+import { GameView } from '@/components/GameView/GameViewData.ts'
+import { players } from './Constants.ts'
 </script>
 
 <template>
@@ -9,15 +9,32 @@ import { players } from './Constants.ts';
   <div>
     <div class="gameField">
       <div class="wrapper">
-        <div v-for="(value, key) in GameView.boardState.value" :key="key" class="cell" @click="GameView.handleClick(key)">
+        <div
+          v-for="(value, key) in GameView.boardState.value"
+          :key="key"
+          class="cell"
+          @click="GameView.handleClick(key)"
+        >
           {{ value === players.p1.value ? 'X' : value === players.p2.value ? 'O' : '' }}
         </div>
       </div>
     </div>
 
     <div class="buttonsDiv">
-      <button class="resetButton" type="reset" @click="GameView.handleReset">Reset</button>
-      <button class="quitButton" type="button" @click="GameView.handleQuit">Quit</button>
+      <button
+        class="resetButton"
+        type="reset"
+        @click="GameView.handleReset"
+      >
+        Reset
+      </button>
+      <button
+        class="quitButton"
+        type="button"
+        @click="GameView.handleQuit"
+      >
+        Quit
+      </button>
     </div>
   </div>
 </template>

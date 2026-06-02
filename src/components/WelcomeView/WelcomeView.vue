@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { p1Name, p2Name, handleNames } from '@/components/WelcomeView/WelcomeViewData.ts';
+import { p1Name, p2Name, handleNames } from '@/components/WelcomeView/WelcomeViewData.ts'
 </script>
 
 <template>
@@ -7,11 +7,24 @@ import { p1Name, p2Name, handleNames } from '@/components/WelcomeView/WelcomeVie
     <h1>Welcome to Tic Tac Toe game!</h1>
 
     <label>
-      <input v-model="p1Name" placeholder="Enter 'player №1' name" type="text">
-      <input v-model="p2Name" placeholder="Enter 'player №2' name" type="text">
+      <input
+        v-model="p1Name"
+        placeholder="Enter 'player №1' name"
+        type="text"
+      >
+      <input
+        v-model="p2Name"
+        placeholder="Enter 'player №2' name"
+        type="text"
+      >
     </label>
 
-    <button type="submit" @click="handleNames">Start</button>
+    <button
+      type="submit"
+      @click="handleNames"
+    >
+      Start
+    </button>
   </div>
 </template>
 
