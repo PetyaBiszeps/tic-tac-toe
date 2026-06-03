@@ -1,5 +1,5 @@
-import WelcomeView from '@/components/WelcomeView/WelcomeView.vue'
-import GameView from '@/components/GameView/GameView.vue'
+import WelcomeView from '@/views/WelcomeView.vue'
+import GameView from '@/views/GameView.vue'
 import {
   createRouter,
   createWebHistory

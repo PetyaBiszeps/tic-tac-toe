@@ -1,5 +1,19 @@
-<script lang="ts" setup>
-import { p1Name, p2Name, handleNames } from '@/components/WelcomeView/WelcomeViewData.ts'
+<script setup lang="ts">
+import usePlayers from '@/composables/usePlayers.ts'
+import {
+  useRouter
+} from 'vue-router'
+
+// Init
+const router = useRouter()
+const {
+  p1Name,
+  p2Name
+} = usePlayers()
+
+async function startGame() {
+  await router.push('/game')
+}
 </script>
 
 <template>
@@ -21,7 +35,7 @@ import { p1Name, p2Name, handleNames } from '@/components/WelcomeView/WelcomeVie
 
     <button
       type="submit"
-      @click="handleNames"
+      @click="startGame"
     >
       Start
     </button>

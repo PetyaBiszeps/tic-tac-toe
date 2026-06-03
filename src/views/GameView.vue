@@ -1,21 +1,35 @@
-<script lang="ts" setup>
-import { GameView } from '@/components/GameView/GameViewData.ts'
-import { players } from '@/components/GameView/Constants.ts'
+<script setup lang="ts">
+import useGame from '@/composables/useGame.ts'
+import {
+  useRouter
+} from 'vue-router'
+
+// Init
+const router = useRouter()
+const {
+  board, message,
+  makeMove, reset
+} = useGame()
+
+async function quit() {
+  reset()
+  await router.push('/')
+}
 </script>
 
 <template>
-  <h1>{{ GameView.handleMessage() }}</h1>
+  <h1>{{ message }}</h1>
 
   <div>
     <div class="gameField">
       <div class="wrapper">
         <div
-          v-for="(value, key) in GameView.boardState.value"
-          :key="key"
+          v-for="(cell, index) in board"
+          :key="index"
           class="cell"
-          @click="GameView.handleClick(key)"
+          @click="makeMove(index)"
         >
-          {{ value === players.p1.value ? 'X' : value === players.p2.value ? 'O' : '' }}
+          {{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}
         </div>
       </div>
     </div>
@@ -24,14 +38,14 @@ import { players } from '@/components/GameView/Constants.ts'
       <button
         class="resetButton"
         type="reset"
-        @click="GameView.handleReset"
+        @click="reset"
       >
         Reset
       </button>
       <button
         class="quitButton"
         type="button"
-        @click="GameView.handleQuit"
+        @click="quit"
       >
         Quit
       </button>
