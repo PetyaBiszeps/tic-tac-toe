@@ -19,6 +19,7 @@
   }
 
   &__footer {
+    display: flex;
     margin-top: clamp(6px, 1vw, 20px);
   }
 }

@@ -26,14 +26,16 @@ async function startGame() {
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <BaseInput
           v-model="p1Name"
-          placeholder="Enter 'player №1' name"
+
           name="player-one"
+          placeholder="Enter 'player №1' name"
         />
 
         <BaseInput
           v-model="p2Name"
-          placeholder="Enter 'player №2' name"
+
           name="player-two"
+          placeholder="Enter 'player №2' name"
         />
       </div>
     </template>
@@ -41,6 +43,8 @@ async function startGame() {
     <template #footer>
       <BaseButton
         type="submit"
+        style="margin: auto"
+
         @click="startGame"
       >
         Start

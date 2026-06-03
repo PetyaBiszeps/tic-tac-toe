@@ -1,0 +1,9 @@
+@keyframes cellAnimation {
+  from {
+    background: white;
+  }
+
+  to {
+    background: var(--bg-hover);
+  }
+}

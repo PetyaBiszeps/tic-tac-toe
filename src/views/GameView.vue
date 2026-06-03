@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import CommonBoard from '@/components/common/CommonBoard.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import useGame from '@/composables/useGame.ts'
 import {
   useRouter
@@ -18,112 +20,62 @@ async function quit() {
 </script>
 
 <template>
-  <h1>{{ message }}</h1>
-
-  <div>
-    <div class="gameField">
-      <div class="wrapper">
+  <CommonBoard :title="message">
+    <template #default>
+      <div class="grid">
         <div
           v-for="(cell, index) in board"
           :key="index"
-          class="cell"
+          class="grid__cell"
+
           @click="makeMove(index)"
         >
-          {{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}
+          <span>{{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}</span>
         </div>
       </div>
-    </div>
+    </template>
 
-    <div class="buttonsDiv">
-      <button
-        class="resetButton"
-        type="reset"
-        @click="reset"
-      >
-        Reset
-      </button>
-      <button
-        class="quitButton"
-        type="button"
-        @click="quit"
-      >
-        Quit
-      </button>
-    </div>
-  </div>
+    <template #footer>
+      <div style="gap: 8px; display: flex; justify-content: space-between; padding: 0 clamp(0.25rem, 1.25vw, 1.25rem);">
+        <BaseButton
+          type="reset"
+          @click="reset"
+        >
+          Reset
+        </BaseButton>
+
+        <BaseButton @click="quit">
+          Quit
+        </BaseButton>
+      </div>
+    </template>
+  </CommonBoard>
 </template>
 
-<style scoped>
-h1 {
-  text-align: center;
-}
-
-.gameField {
-  border-radius: 0.75rem;
-  background: var(--bg-welcome);
-  border: 2px solid var(--border);
-  padding: clamp(0rem, 1.25vw, 1.25rem);
-}
-
-.wrapper {
+<style scoped lang="scss">
+.grid {
+  gap: clamp(0.5rem, 1vw, 2rem);
   display: grid;
-  border-radius: 1rem;
-  grid-gap: clamp(0.5rem, 1vw, 2rem);
-  grid-template-columns: repeat(3, 1fr);
   padding: clamp(0.25rem, 1.25vw, 1.25rem);
-}
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
 
-.cell {
-  width: 6rem;
-  height: 6rem;
+  &__cell {
+    width: 6rem;
+    height: 6rem;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  cursor: pointer;
-  font-size: 6rem;
-  border-radius: 1rem;
-  border: 2px solid var(--border);
-}
+    cursor: pointer;
+    font-size: 6rem;
+    border-radius: 1rem;
+    border: 2px solid var(--border);
 
-.cell:hover {
-  animation: cellAnimation 0.15s linear 1 normal forwards;
-}
-
-@keyframes cellAnimation {
-  from {
-    background: white;
+    &:hover {
+      animation: cellAnimation 0.15s linear 1 normal forwards;
+    }
   }
-
-  to {
-    background: var(--bg-hover);
-  }
-}
-
-.buttonsDiv {
-  display: flex;
-  justify-content: space-between;
-}
-
-button {
-  display: block;
-  cursor: pointer;
-  font-weight: bold;
-  color: var(--text);
-  font-size: 1.5rem;
-  padding: 0.5rem 4rem;
-  border-radius: 0.35rem;
-  background: var(--bg-button);
-  border: 2px solid var(--border);
-  margin-top: clamp(0.4rem, 1vw, 1.25rem);
-}
-
-.resetButton:hover {
-  background: var(--bg-hover2);
-}
-
-.quitButton:hover {
-  background: var(--bg-hover);
 }
 </style>
