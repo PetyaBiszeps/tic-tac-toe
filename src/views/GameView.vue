@@ -20,23 +20,31 @@ async function quit() {
 </script>
 
 <template>
-  <CommonBoard :title="message">
-    <template #default>
-      <div class="grid">
-        <div
-          v-for="(cell, index) in board"
-          :key="index"
-          class="grid__cell"
+  <section style="gap: 8px; display: flex; flex-direction: column">
+    <header style="text-align: center">
+      <h1>{{ message }}</h1>
+    </header>
 
-          @click="makeMove(index)"
-        >
-          <span>{{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}</span>
-        </div>
-      </div>
-    </template>
+    <main>
+      <CommonBoard>
+        <template #default>
+          <div class="grid">
+            <div
+              v-for="(cell, index) in board"
+              :key="index"
+              class="grid__cell"
 
-    <template #footer>
-      <div style="gap: 8px; display: flex; justify-content: space-between; padding: 0 clamp(0.25rem, 1.25vw, 1.25rem);">
+              @click="makeMove(index)"
+            >
+              <span>{{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}</span>
+            </div>
+          </div>
+        </template>
+      </CommonBoard>
+    </main>
+
+    <footer>
+      <div style="gap: 8px; display: flex; justify-content: space-between">
         <BaseButton
           type="reset"
           @click="reset"
@@ -48,8 +56,8 @@ async function quit() {
           Quit
         </BaseButton>
       </div>
-    </template>
-  </CommonBoard>
+    </footer>
+  </section>
 </template>
 
 <style scoped lang="scss">
