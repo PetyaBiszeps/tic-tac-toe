@@ -10,7 +10,7 @@ import {
 const router = useRouter()
 const {
   board, message,
-  makeMove, reset
+  getCellSymbol, makeMove, reset
 } = useGame()
 
 async function quit() {
@@ -36,7 +36,7 @@ async function quit() {
 
               @click="makeMove(index)"
             >
-              <span>{{ cell === 'x' ? 'X' : cell === 'o' ? 'O' : '' }}</span>
+              <span>{{ getCellSymbol(cell) }}</span>
             </div>
           </div>
         </template>

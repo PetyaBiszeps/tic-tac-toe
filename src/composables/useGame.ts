@@ -1,54 +1,36 @@
+import GAME_CONSTANTS from '@/constants/GAME_CONSTANTS.ts'
+import getRandomPlayer from '@/utils/getRandomPlayer.ts'
+import getCellSymbol from '@/utils/getCellSymbol.ts'
 import usePlayers from '@/composables/usePlayers.ts'
-import {
-  ref,
-  computed
-} from 'vue'
-
-type Player = 'x' | 'o'
-type Cell = Player | null
-
-const winningLines = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-] as const
-
-function getRandomPlayer(): Player {
-  return Math.random() < 0.5 ? 'x' : 'o'
-}
+import { ref, computed } from 'vue'
+import type {
+  Cell,
+  Player
+} from '@/types'
 
 export default () => {
-  const { players } = usePlayers()
+  // Init
+  const {
+    players
+  } = usePlayers()
 
+  // Constants
   const board = ref<Cell[]>(Array(9).fill(null))
   const currentPlayer = ref<Player>(getRandomPlayer())
 
   const winner = computed<Player | null>(() => {
-    for (const [a, b, c] of winningLines) {
-      if (
-        board.value[a] &&
-        board.value[a] === board.value[b] &&
-        board.value[a] === board.value[c]
-      ) {
-        return board.value[a]
+    for (const [a, b, c] of GAME_CONSTANTS.winningLines) {
+      const cell = board.value[a]
+
+      if (cell && cell === board.value[b] && cell === board.value[c]) {
+        return cell
       }
     }
 
     return null
   })
-
-  const isDraw = computed(() => {
-    return board.value.every(Boolean) && !winner.value
-  })
-
-  const isGameOver = computed(() => {
-    return Boolean(winner.value || isDraw.value)
-  })
+  const isDraw = computed(() => board.value.every(Boolean) && !winner.value)
+  const isGameOver = computed(() => Boolean(winner.value || isDraw.value))
 
   const message = computed(() => {
     if (winner.value) {
@@ -58,17 +40,22 @@ export default () => {
     if (isDraw.value) {
       return 'All cells are filled, but no winner!'
     }
-
     return `It is ${players[currentPlayer.value].value} turn`
   })
 
-  function makeMove(index: number) {
-    if (isGameOver.value || board.value[index]) return
+  // Methods
+  function switchPlayer() {
+    currentPlayer.value = currentPlayer.value === 'x' ? 'o' : 'x'
+  }
 
+  function makeMove(index: number) {
+    if (isGameOver.value || board.value[index]) {
+      return
+    }
     board.value[index] = currentPlayer.value
 
     if (!isGameOver.value) {
-      currentPlayer.value = currentPlayer.value === 'x' ? 'o' : 'x'
+      return switchPlayer()
     }
   }
 
@@ -80,11 +67,7 @@ export default () => {
   return {
     board,
     currentPlayer,
-    winner,
-    isDraw,
-    isGameOver,
-    message,
-    makeMove,
-    reset
+    winner, isDraw, isGameOver, message,
+    getCellSymbol, makeMove, reset
   }
 }
