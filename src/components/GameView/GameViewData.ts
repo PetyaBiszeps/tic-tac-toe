@@ -1,6 +1,9 @@
 import { players, result } from '@/components/GameView/Constants.ts'
-import { ref, watch } from 'vue'
-import router from '@/router'
+import router from '@/router/router.ts'
+import {
+  ref,
+  watch
+} from 'vue'
 
 class GameViewData {
   player = ref(Math.random() < 0.5 ? players.p1.value : players.p2.value)

@@ -1,21 +1,40 @@
 {
-  "files": [],
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
+    // Global
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    // Compile options
     "noEmit": true,
-    "types": ["node"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // TS
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // JSX
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+
+    // Alias
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+      "@/*": ["./src/*"]
+    },
+    "ignoreDeprecations": "6.0"   // ALERT: TypeScript 7.0 will break baseUrl
   },
-  "exclude": ["src/**/__tests__/*"],
   "include": [
-    "env.d.ts", "src/**/*", "src/**/*.vue",
-    "vite.config.*", "vitest.config.*", "cypress.config.*",
-    "playwright.config.*", "nightwatch.conf.*"
+    "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue",
+    "vite.config.ts", "eslint.config.mjs", "env.d.ts"
   ]
 }

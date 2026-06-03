@@ -1,5 +1,7 @@
 import { p1Name, p2Name } from '@/components/WelcomeView/WelcomeViewData.ts'
-import { computed } from 'vue'
+import {
+  computed
+} from 'vue'
 
 export enum defaultNames {
   p1 = 'Player №1',

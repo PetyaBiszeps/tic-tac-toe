@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { GameView } from '@/components/GameView/GameViewData.ts'
-import { players } from './Constants.ts'
+import { players } from '@/components/GameView/Constants.ts'
 </script>
 
 <template>
