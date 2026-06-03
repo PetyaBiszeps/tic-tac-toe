@@ -1,0 +1,24 @@
+.commonBoard {
+  margin: auto;
+  border: 2px solid var(--border);
+  padding: clamp(0rem, 1.25vw, 1.25rem);
+  background: var(--bg-welcome);
+  border-radius: 12px;
+
+  &__header {
+    margin-bottom: clamp(8px, 1.25vw, 20px);
+
+    &__title {
+      color: var(--h1);
+      text-align: center;
+    }
+  }
+
+  &__main {
+    width: 100%;
+  }
+
+  &__footer {
+    margin-top: clamp(6px, 1vw, 20px);
+  }
+}
