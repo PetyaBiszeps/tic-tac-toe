@@ -28,9 +28,7 @@ export default [{
     '@stylistic/comma-dangle': ['error', 'never'],
     '@stylistic/object-curly-spacing': ['error', 'always'],
     '@stylistic/quote-props': ['error', 'consistent-as-needed'],
-    '@stylistic/brace-style': ['error', '1tbs', {
-      allowSingleLine: true
-    }],
+    '@stylistic/brace-style': ['error', '1tbs'],
     '@stylistic/key-spacing': ['error', {
       beforeColon: false,
       afterColon: true
